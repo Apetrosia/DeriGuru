@@ -19,3 +19,10 @@ Layout/LineLength:
 
 Metrics/MethodLength:
   Max: 20
+
+Metrics/AbcSize:
+  CountRepeatedAttributes: false
+
+Minitest/AssertRespondTo:
+  Enabled: false
+
