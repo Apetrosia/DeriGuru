@@ -10,6 +10,5 @@ module DeriGuru
       str
     end
 
-
   end
 end
