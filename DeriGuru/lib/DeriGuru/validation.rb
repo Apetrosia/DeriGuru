@@ -7,24 +7,23 @@ module DeriGuru
 
     # TODO: implement validation
     def validation_check(poly_string)
-      poly_string = "+" + poly_string unless "+-".include?(poly_string[0])
-
-=begin
-      sign = /[+-]/
-      coef = /(\d+(\.\d+)?)?/
-      multi_sign = /\*?/
-      variables = /((?<var>[a-z])(\^\d+)?\*?)*/
-      pattern = sign + coef + multi_sign + variables # [+-](\d+(\.\d+)?)?\*?((?<var>[a-z])(\^\d+)?\*?)*
-=end
-
+      copy = "+-".include?(poly_string[0]) ? poly_string : "+" + poly_string
+      copy = copy.strip
+      # [+-](\d+(\.\d+)?)?\*?((?<var>[a-z])(\^\d+)?\*?)*
       pattern = /^(
-                 [+-]
-                 (\d+(\.\d+)?)?
-                 \*?
-                 ((?<var>[a-z])(\^\d+)?\*?)*
+                 [+-]\s*                  # sign before term
+                 (\d+(\.\d+)?)?\s*        # coefficient
+                 \*?\s*                   # multiply sign
+                 ([a-z](\^\d+)?\*?)*\s*   # variables
                  )+$/x
 
-      raise StandardError if ((poly_string =~ pattern) == nil)
+      raise StandardError, "You passed invalid polynomial to the method" if copy.match(pattern) == nil || copy[-1] == "*"
+
+      copy.split(/[+-]/).each do |term|
+        vars = term.scan(/[a-z]/)
+        raise StandardError, "Multiple similar variables in one term are not allowed" if vars.size > vars.uniq.size
+      end
+
     end
   end
 end

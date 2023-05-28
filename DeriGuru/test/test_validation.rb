@@ -16,7 +16,7 @@ class TestDeriCalculation < Minitest::Test
 
   # Tests without exceptions
   def test_no_var_digit
-    assert_silent { @poly_differ.send(:validation_check, "1 ") }
+    assert_silent { @poly_differ.send(:validation_check, "1") }
     assert_silent { @poly_differ.send(:validation_check, "-1") }
     assert_silent { @poly_differ.send(:validation_check, "2.3") }
     assert_silent { @poly_differ.send(:validation_check, "-20.3") }
@@ -37,7 +37,6 @@ class TestDeriCalculation < Minitest::Test
     assert_silent { @poly_differ.send(:validation_check, "-x") }
   end
 
-=begin
   def test_one_variable_operation
     assert_silent { validation_check("x+x") }
     assert_silent { validation_check("x-x") }
@@ -87,7 +86,6 @@ class TestDeriCalculation < Minitest::Test
     assert_silent { validation_check("-12.87x^2+164.0x^3-9x^6+x-12") }
     assert_silent { validation_check("13.76+12.08x^2-164.0001x^3+913.9x^6-x") }
   end
-=end
 
   # Tests hide until we haven't realization for several variables
   # def test_two_var_opers
