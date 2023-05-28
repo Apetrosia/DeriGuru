@@ -3,7 +3,8 @@
 require_relative "test_helper"
 require_relative "../lib/DeriGuru/validation"
 
-class TestDeriCalculation < Minitest::Test
+# tests for validating input string
+class TestValidation < Minitest::Test
   include DeriGuru
 
   def setup
@@ -144,59 +145,55 @@ class TestDeriCalculation < Minitest::Test
   #   assert_silent { validation_check("-12*x^3-14.98*x^2+x+1*y^1+14.78*y^4+34*y^2-56.001*z^2-z+z^3") }
   # end
 
-=begin
-  def test_unexpected_symb_space
-    assert_silent { validation_check("-x^3 -y^1-z^2") }
-  end
-
-  # Исключения: - неоджиданный(запрещённый) символ
-
-  def test_unexpected_symb_division
-    assert_raises(StandardError) { validation_check("x/x") }
-    assert_raises(StandardError) { validation_check("12.95/34") }
-  end
-
-  def test_unexpected_symb_bracket
-    assert_raises(StandardError) { validation_check("x^(-12-9)+x^(12-4)") }
-    assert_raises(StandardError) { validation_check("x+(x-y)") }
-  end
-
-  def test_unexpected_symb_rand
-    assert_raises(StandardError) { validation_check("x^7+x^0!") }
-    assert_raises(StandardError) { validation_check("1<5+x>y") }
-  end
-
-  #  Exception - неправильно употреблён символ
-
-  def test_wrong_placed_symbol_prod
-    # Tests hide until we haven't realization for several variables
-    # assert_raises(StandardError) { validation_check("x^2*x^3*x^6") } - should send this test to correct part of tests
-    # assert_raises(StandardError) { validation_check("x*x") }
-    assert_raises(StandardError) { validation_check("6*6") }
-    assert_raises(StandardError) { validation_check("6*7*x^2+x") }
-  end
-
-  def test_wrong_placed_symb_duplcts
-    assert_raises(StandardError) { validation_check("x++x") }
-    assert_raises(StandardError) { validation_check("x--x") }
-    assert_raises(StandardError) { validation_check("4.2**x") }
-    assert_raises(StandardError) { validation_check("4..02x") }
-    assert_raises(StandardError) { validation_check("x^^3") }
-  end
-=end
+  #   def test_unexpected_symb_space
+  #     assert_silent { validation_check("-x^3 -y^1-z^2") }
+  #   end
+  #
+  #   # Исключения: - неоджиданный(запрещённый) символ
+  #
+  #   def test_unexpected_symb_division
+  #     assert_raises(StandardError) { validation_check("x/x") }
+  #     assert_raises(StandardError) { validation_check("12.95/34") }
+  #   end
+  #
+  #   def test_unexpected_symb_bracket
+  #     assert_raises(StandardError) { validation_check("x^(-12-9)+x^(12-4)") }
+  #     assert_raises(StandardError) { validation_check("x+(x-y)") }
+  #   end
+  #
+  #   def test_unexpected_symb_rand
+  #     assert_raises(StandardError) { validation_check("x^7+x^0!") }
+  #     assert_raises(StandardError) { validation_check("1<5+x>y") }
+  #   end
+  #
+  #   #  Exception - неправильно употреблён символ
+  #
+  #   def test_wrong_placed_symbol_prod
+  #     # Tests hide until we haven't realization for several variables
+  #     # assert_raises(StandardError) { validation_check("x^2*x^3*x^6") } - should send this test to correct part of tests
+  #     # assert_raises(StandardError) { validation_check("x*x") }
+  #     assert_raises(StandardError) { validation_check("6*6") }
+  #     assert_raises(StandardError) { validation_check("6*7*x^2+x") }
+  #   end
+  #
+  #   def test_wrong_placed_symb_duplcts
+  #     assert_raises(StandardError) { validation_check("x++x") }
+  #     assert_raises(StandardError) { validation_check("x--x") }
+  #     assert_raises(StandardError) { validation_check("4.2**x") }
+  #     assert_raises(StandardError) { validation_check("4..02x") }
+  #     assert_raises(StandardError) { validation_check("x^^3") }
+  #   end
 
   # def test_wrong_placed_symb_letters
   #   assert_raises(StandardError) { validation_check("2x+xy") }
   #   assert_raises(StandardError) { validation_check("hello") }
   # end
 
-=begin
-  def test_wrong_placed_symbol
-    assert_raises(StandardError) { validation_check("x+-x") }
-    assert_raises(StandardError) { validation_check("x-+x") }
-    assert_raises(StandardError) { validation_check("x^-4+x") }
-    assert_raises(StandardError) { validation_check("4*x^3") }
-    assert_raises(StandardError) { validation_check("x9-3+y") }
-  end
-=end
+  #   def test_wrong_placed_symbol
+  #     assert_raises(StandardError) { validation_check("x+-x") }
+  #     assert_raises(StandardError) { validation_check("x-+x") }
+  #     assert_raises(StandardError) { validation_check("x^-4+x") }
+  #     assert_raises(StandardError) { validation_check("4*x^3") }
+  #     assert_raises(StandardError) { validation_check("x9-3+y") }
+  #   end
 end
