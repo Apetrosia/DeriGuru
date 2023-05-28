@@ -5,8 +5,15 @@ module DeriGuru
   class PolyDiffer
     private
 
-    # TODO: implement differentiating
     def calculate_derivative(poly)
+      if (!poly.nil?)
+        for i in poly do
+          for j in i do
+            poly[i][1] = poly[i][0] * poly[i][1]
+            poly[i][0]--
+          end
+        end
+      end
       poly
     end
   end
