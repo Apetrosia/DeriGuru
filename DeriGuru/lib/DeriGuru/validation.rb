@@ -13,7 +13,7 @@ module DeriGuru
       copy = copy.strip
       # [+-](\d+(\.\d+)?)?\*?((?<var>[a-z])(\^\d+)?\*?)*
       pattern = /^(
-                 [+-]\s*                  # sign before term
+                 [+-]\s*(?![+-])          # sign before term
                  (\d+(\.\d+)?)?\s*        # coefficient
                  \*?\s*                   # multiply sign
                  ([a-z](\^\d+)?\*?)*\s*   # variables

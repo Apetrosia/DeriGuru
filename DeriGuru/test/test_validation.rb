@@ -2,6 +2,7 @@
 
 require_relative "test_helper"
 require_relative "../lib/DeriGuru/validation"
+require_relative "../lib/exceptions"
 
 # tests for validating input string
 class TestValidation < Minitest::Test
@@ -89,117 +90,114 @@ class TestValidation < Minitest::Test
   end
 
   # Tests hide until we haven't realization for several variables
-  # def test_two_var_opers
-  #   assert_silent { @poly_differ.send(:validation_check,"x+y") }
-  #   assert_silent { @poly_differ.send(:validation_check,"x-y") }
-  #   assert_silent { @poly_differ.send(:validation_check,"y-x") }
-  #   assert_silent { @poly_differ.send(:validation_check,"-x-y") }
-  # end
-  #
-  # def test_two_var_opers_with_coefs
-  #   assert_silent { @poly_differ.send(:validation_check,"5*x+12*y") }
-  #   assert_silent { @poly_differ.send(:validation_check,"5*x-3*y") }
-  #   assert_silent { @poly_differ.send(:validation_check,"0*y-x") }
-  #   assert_silent { @poly_differ.send(:validation_check,"-x-9*y") }
-  #   assert_silent { @poly_differ.send(:validation_check,"0.12*x+87.9*y") }
-  #   assert_silent { @poly_differ.send(:validation_check,"13.0*x-98*y") }
-  #   assert_silent { @poly_differ.send(:validation_check,"1.1*y-x") }
-  #   assert_silent { @poly_differ.send(:validation_check,"-195.1*x-0.08y") }
-  # end
-  #
-  # def test_two_var_opers_with_degree
-  #   assert_silent { @poly_differ.send(:validation_check,"x^1+y^3+x^2") }
-  #   assert_silent { @poly_differ.send(:validation_check,"x^7+y^32+y^2") }
-  #   assert_silent { @poly_differ.send(:validation_check,"x^7+y^32+y^2+x^4") }
-  #   assert_silent { @poly_differ.send(:validation_check,"x^1-y^3+x^2") }
-  #   assert_silent { @poly_differ.send(:validation_check,"x^7-y^32-y^2") }
-  #   assert_silent { @poly_differ.send(:validation_check,"x^7-y^32+y^2-x^4") }
-  # end
-  #
-  # def test_two_var_deg_and_coefs
-  #   assert_silent { @poly_differ.send(:validation_check,"y^32+3*y^2+9.8*x") }
-  #   assert_silent { @poly_differ.send(:validation_check,"98*x^7+1.17*y^32+9*y^2-x^4") }
-  #   assert_silent { @poly_differ.send(:validation_check,"9*x^1-1*y^3+8*x^2") }
-  #   assert_silent { @poly_differ.send(:validation_check,"83.0*x^7-12.9*y^32-89.944*y^2") }
-  #   assert_silent { @poly_differ.send(:validation_check,"12.8*x^7-12.98*y^32+0*y^2-12.45*x^4") }
-  # end
-  #
-  # def test_three_var_opers
-  #   assert_silent { @poly_differ.send(:validation_check,"x+y+z") }
-  #   assert_silent { @poly_differ.send(:validation_check,"x-y-z") }
-  # end
-  #
-  # def test_three_var_with_coefs
-  #   assert_silent { @poly_differ.send(:validation_check,"2*x+75*y+123.74*z") }
-  #   assert_silent { @poly_differ.send(:validation_check,"2*x-75*y-123.74*z") }
-  # end
-  #
-  # def test_three_var_with_degree
-  #   assert_silent { @poly_differ.send(:validation_check,"x^3+y^1+z^2") }
-  #   assert_silent { @poly_differ.send(:validation_check,"-x^3-y^1-z^2") }
-  # end
-  #
-  # def test_three_var_deg_and_coefs
-  #   assert_silent { @poly_differ.send(:validation_check,"78.89*x^3+0*y^1+12*z^2") }
-  #   assert_silent { @poly_differ.send(:validation_check,"x^3+x^0+y^1+y^2+z^2+z^3") }
-  #   assert_silent { @poly_differ.send(:validation_check,"-12*x^3-14.98*x^2+x+1*y^1+14.78*y^4+34*y^2-56.001*z^2-z+z^3") }
-  # end
+  def test_two_var_opers
+    assert_silent { @poly_differ.send(:validation_check, "x+y") }
+    assert_silent { @poly_differ.send(:validation_check, "x-y") }
+    assert_silent { @poly_differ.send(:validation_check, "y-x") }
+    assert_silent { @poly_differ.send(:validation_check, "-x-y") }
+  end
 
-=begin
-  def test_unexpected_symb_space
+  def test_two_var_opers_with_coefs
+    assert_silent { @poly_differ.send(:validation_check, "5*x+12*y") }
+    assert_silent { @poly_differ.send(:validation_check, "5*x-3*y") }
+    assert_silent { @poly_differ.send(:validation_check, "0*y-x") }
+    assert_silent { @poly_differ.send(:validation_check, "-x-9*y") }
+    assert_silent { @poly_differ.send(:validation_check, "0.12*x+87.9*y") }
+    assert_silent { @poly_differ.send(:validation_check, "13.0*x-98*y") }
+    assert_silent { @poly_differ.send(:validation_check, "1.1*y-x") }
+    assert_silent { @poly_differ.send(:validation_check, "-195.1*x-0.08y") }
+  end
+
+  def test_two_var_opers_with_degree
+    assert_silent { @poly_differ.send(:validation_check, "x^1+y^3+x^2") }
+    assert_silent { @poly_differ.send(:validation_check, "x^7+y^32+y^2") }
+    assert_silent { @poly_differ.send(:validation_check, "x^7+y^32+y^2+x^4") }
+    assert_silent { @poly_differ.send(:validation_check, "x^1-y^3+x^2") }
+    assert_silent { @poly_differ.send(:validation_check, "x^7-y^32-y^2") }
+    assert_silent { @poly_differ.send(:validation_check, "x^7-y^32+y^2-x^4") }
+  end
+
+  def test_two_var_deg_and_coefs
+    assert_silent { @poly_differ.send(:validation_check, "y^32+3*y^2+9.8*x") }
+    assert_silent { @poly_differ.send(:validation_check, "98*x^7+1.17*y^32+9*y^2-x^4") }
+    assert_silent { @poly_differ.send(:validation_check, "9*x^1-1*y^3+8*x^2") }
+    assert_silent { @poly_differ.send(:validation_check, "83.0*x^7-12.9*y^32-89.944*y^2") }
+    assert_silent { @poly_differ.send(:validation_check, "12.8*x^7-12.98*y^32+0*y^2-12.45*x^4") }
+  end
+
+  def test_three_var_opers
+    assert_silent { @poly_differ.send(:validation_check, "x+y+z") }
+    assert_silent { @poly_differ.send(:validation_check, "x-y-z") }
+  end
+
+  def test_three_var_with_coefs
+    assert_silent { @poly_differ.send(:validation_check, "2*x+75*y+123.74*z") }
+    assert_silent { @poly_differ.send(:validation_check, "2*x-75*y-123.74*z") }
+  end
+
+  def test_three_var_with_degree
+    assert_silent { @poly_differ.send(:validation_check, "x^3+y^1+z^2") }
+    assert_silent { @poly_differ.send(:validation_check, "-x^3-y^1-z^2") }
+  end
+
+  def test_three_var_deg_and_coefs
+    assert_silent { @poly_differ.send(:validation_check, "78.89*x^3+0*y^1+12*z^2") }
+    assert_silent { @poly_differ.send(:validation_check, "x^3+x^0+y^1+y^2+z^2+z^3") }
+    assert_silent do
+      @poly_differ.send(:validation_check, "-12*x^3-14.98*x^2+x+1*y^1+14.78*y^4+34*y^2-56.001*z^2-z+z^3")
+    end
+  end
+
+  def test_polynomials_with_spaces
     assert_silent { @poly_differ.send(:validation_check, "-x^3 -y^1-z^2") }
     assert_silent { @poly_differ.send(:validation_check, " -x^3-y^1-z^2") }
     assert_silent { @poly_differ.send(:validation_check, "-x^3-y^1-z^2 ") }
-    assert_silent { @poly_differ.send(:validation_check, " -x ^3 -y^1-z ^ 2") }
   end
 
   # Исключения: - неоджиданный(запрещённый) символ
 
   def test_unexpected_symb_division
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"x/x") }
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"12.95/34") }
+    assert_raises(UnexpectedSymbolError) { @poly_differ.send(:validation_check, "x/x") }
+    assert_raises(UnexpectedSymbolError) { @poly_differ.send(:validation_check, "12.95/34") }
   end
 
   def test_unexpected_symb_bracket
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"x^(-12-9)+x^(12-4)") }
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"x+(x-y)") }
+    assert_raises(UnexpectedSymbolError) { @poly_differ.send(:validation_check, "x^(-12-9)+x^(12-4)") }
+    assert_raises(UnexpectedSymbolError) { @poly_differ.send(:validation_check, "x+(x-y)") }
   end
 
   def test_unexpected_symb_rand
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"x^7+x^0!") }
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"1<5+x>y") }
+    assert_raises(UnexpectedSymbolError) { @poly_differ.send(:validation_check, "x^7+x^0!") }
+    assert_raises(UnexpectedSymbolError) { @poly_differ.send(:validation_check, "1<5+x>y") }
   end
 
   #  Exception - неправильно употреблён символ
 
   def test_wrong_placed_symbol_prod
     # Tests hide until we haven't realization for several variables
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"x^2*x^3*x^6") } - should send this test to correct part of tests
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"x*x") }
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"6*6") }
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"6*7*x^2+x") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x^2*x^3*x^6") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x*x") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "6*6") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "6*7*x^2+x") }
   end
 
   def test_wrong_placed_symb_duplcts
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"x++x") }
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"x--x") }
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"4.2**x") }
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"4..02x") }
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"x^^3") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x++x") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x--x") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "4.2**x") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "4..02x") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x^^3") }
   end
-=end
 
   # def test_wrong_placed_symb_letters
   #   assert_raises(StandardError) { @poly_differ.send(:validation_check,"2x+xy") }
   #   assert_raises(StandardError) { @poly_differ.send(:validation_check,"hello") }
   # end
-=begin
+
   def test_wrong_placed_symbol
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"x+-x") }
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"x-+x") }
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"x^-4+x") }
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"4*x^3") }
-    assert_raises(StandardError) { @poly_differ.send(:validation_check,"x9-3+y") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x+-x") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x-+x") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x^-4+x") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x9-3+y") }
   end
-=end
 end
