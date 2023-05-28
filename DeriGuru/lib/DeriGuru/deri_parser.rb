@@ -9,6 +9,5 @@ module DeriGuru
     def poly_parse(str)
       str
     end
-
   end
 end
