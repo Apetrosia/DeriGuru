@@ -23,7 +23,10 @@ module Minitest
     end
 
     def assert_polynomials_in_delta(expected, actual, msg = nil)
-      expected.zip(actual).each { |pair1, pair2| assert_arrays_in_delta pair1, pair2, msg }
+      expected.zip(actual).each do |triplet1, triplet2|
+        assert_arrays_in_delta triplet1[0..1], triplet2[0..1], msg
+        assert_equal triplet1[2], triplet2[2], msg
+      end
     end
   end
 end
