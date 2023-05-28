@@ -16,7 +16,7 @@ class PolyDiffer
                 if added_elems > 0 or sgn == "-"
                     new_elem += sgn
                 end
-                if rt != 1 or dg == 0
+                if rt != 1 or (dg == 0 and (lt.nil? or lt == ""))
                     new_elem += rt.to_s
                 end
                 unless lt.nil?

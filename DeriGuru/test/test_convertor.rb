@@ -42,4 +42,10 @@ class TestConvertor < Minitest::Test
     assert_equal "-2x^3+15.5x^2-1.8x", @poly_differ.send(:Convert,[[1,-1.8],[2,15.5],[3,-2]],"x")
   end
 
+  def test_multiple_variables_deri_convertor
+    assert_equal "6yx^3", @poly_differ.send(:Convert, [[3, 6, "y"]], "x")
+    assert_equal "yz", @poly_differ.send(:Convert, [[0, 1, "yz"]], "x")
+    assert_equal "-2.2yzx^2-zx^1.6+8x-7y", @poly_differ.send(:Convert,[[2,-2.2,"yz"],[1.6,-1,"z"],[1,8,""],[0,-7,"y"]],"x")
+  end
+
 end
