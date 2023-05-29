@@ -5,12 +5,16 @@ module DeriGuru
   class PolyDiffer
     private
 
+    
     def calculate_derivative(poly)
       if (!poly.nil?)
-        for i in poly do
-          poly[i][1] = poly[i][0] * poly[i][1]
-          poly[i][0]--
+        poly.delete_if {|term| term[0] == 0 }
+
+        poly.each do |term|
+          term[1] = term[0] * term[1]
+          term[0] -= 1    
         end
+
       end
       poly
     end
