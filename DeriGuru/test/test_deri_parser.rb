@@ -86,7 +86,7 @@ class TestDeriParser < Minitest::Test
   def test_several_power_vars_in_several_terms
     assert_equal([[1, 2, "y^2"], [1, 3, ""]], @poly_differ.send(:poly_parse, "2xy^2+3x", "x"))
     assert_equal([[1, 2, ""], [1, 2, "y^2"]], @poly_differ.send(:poly_parse, "2xy^2+2x", "x"))
-    assert_equal([[1, 5, "y^2"]], @poly_differ.send(:poly_parse, "2xy^2+x3y^2", "x"))
+    assert_equal([[1, 5, "y^2"]], @poly_differ.send(:poly_parse, "2xy^2+3xy^2", "x"))
     assert_equal([[1, 5, "y^2"]], @poly_differ.send(:poly_parse, "2xy^2+3y^2x", "x"))
     assert_equal([[1, -6, "y^2z^3"]], @poly_differ.send(:poly_parse, "2xy^2z^3+3z^3y^2x-11y^2z^3x", "x"))
   end
