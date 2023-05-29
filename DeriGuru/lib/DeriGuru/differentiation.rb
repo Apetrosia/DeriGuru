@@ -10,8 +10,7 @@ module DeriGuru
       validation_check(poly_str)
       poly_parsed = poly_parse(poly_str, diff_var)
       poly_diff = calculate_derivative(poly_parsed)
-      poly_converted = Convert(poly_diff, diff_var)
-      return poly_converted
+      Convert(poly_diff, diff_var)
     end
   end
 end
