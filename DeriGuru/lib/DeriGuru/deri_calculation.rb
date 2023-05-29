@@ -8,10 +8,8 @@ module DeriGuru
     def calculate_derivative(poly)
       if (!poly.nil?)
         for i in poly do
-          for j in i do
-            poly[i][1] = poly[i][0] * poly[i][1]
-            poly[i][0]--
-          end
+          poly[i][1] = poly[i][0] * poly[i][1]
+          poly[i][0]--
         end
       end
       poly
