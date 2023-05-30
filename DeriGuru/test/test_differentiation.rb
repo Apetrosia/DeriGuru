@@ -65,7 +65,6 @@ class TestConvertor < Minitest::Test
     assert_equal "-zx^3+2.22yzx^2+8x-7y",@poly_differ.send(:differentiate, "0.74x^3yz-0.25x^4z+4x^2-7xy" , "x")
     assert_equal "6yx^3", @poly_differ.send(:differentiate, "1.5x^4y", "x")
     assert_equal "yz", @poly_differ.send(:differentiate, "xyz", "x")
-    assert_equal "-zx^3+2.25yzx^2+8x-7y",@poly_differ.send(:differentiate, "0.75x^3yz-0.25x^4z+4x^2-7xy" , "x")
+    assert_equal "-zx^3+2.25yzx^2+8x-7y", @poly_differ.send(:differentiate, "0.75x^3yz-0.25x^4z+4x^2-7xy", "x")
   end
-
 end

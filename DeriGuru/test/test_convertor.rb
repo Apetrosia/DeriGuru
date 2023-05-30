@@ -16,28 +16,28 @@ class TestConvertor < Minitest::Test
   end
 
   def test_int_deri_convertor
-    assert_equal "", @poly_differ.send(:Convert,[],"x")        
-    assert_equal "", @poly_differ.send(:Convert,[[1,0,""]],"x")        
-    assert_equal "1", @poly_differ.send(:Convert,[[0,1,""]],"x")
-    assert_equal "x", @poly_differ.send(:Convert,[[1,1,""]],"x")
-    assert_equal "2x", @poly_differ.send(:Convert,[[1,2,""]],"x")
-    assert_equal "2x^3", @poly_differ.send(:Convert,[[3,2,""]],"x")
-    assert_equal "2x^3+x", @poly_differ.send(:Convert,[[1,1,""],[3,2,""]],"x")
-    assert_equal "-2x^3", @poly_differ.send(:Convert,[[3,-2,""]],"x")
-    assert_equal "-2x^3", @poly_differ.send(:Convert,[[3,-2,""]],"x")
-    assert_equal "-2x^3+15x^2-x", @poly_differ.send(:Convert,[[1,-1,""],[2,15,""],[3,-2,""]],"x")
+    assert_equal "", @poly_differ.send(:Convert, [], "x")
+    assert_equal "", @poly_differ.send(:Convert, [[1, 0, ""]], "x")
+    assert_equal "1", @poly_differ.send(:Convert, [[0, 1, ""]], "x")
+    assert_equal "x", @poly_differ.send(:Convert, [[1, 1, ""]], "x")
+    assert_equal "2x", @poly_differ.send(:Convert, [[1, 2, ""]], "x")
+    assert_equal "2x^3", @poly_differ.send(:Convert, [[3, 2, ""]], "x")
+    assert_equal "2x^3+x", @poly_differ.send(:Convert, [[1, 1, ""], [3, 2, ""]], "x")
+    assert_equal "-2x^3", @poly_differ.send(:Convert, [[3, -2, ""]], "x")
+    assert_equal "-2x^3", @poly_differ.send(:Convert, [[3, -2, ""]], "x")
+    assert_equal "-2x^3+15x^2-x", @poly_differ.send(:Convert, [[1, -1, ""], [2, 15, ""], [3, -2, ""]], "x")
   end
 
   def test_double_deri_convertor
-    assert_equal "", @poly_differ.send(:Convert,[[1.5,0,""]],"x")        
-    assert_equal "x^1.5", @poly_differ.send(:Convert,[[1.5,1,""]],"x")
-    assert_equal "1.5x", @poly_differ.send(:Convert,[[1, 1.5,""]],"x")
-    assert_equal "-2x^1.5", @poly_differ.send(:Convert,[[1.5,-2,""]],"x")
-    assert_equal "2.2x^3.5", @poly_differ.send(:Convert,[[3.5,2.2,""]],"x")
-    assert_equal "2.5x^3+x^1.2", @poly_differ.send(:Convert,[[1.2,1,""],[3,2.5,""]],"x")
-    assert_equal "-2.1x^3.2", @poly_differ.send(:Convert,[[3.2,-2.1,""]],"x")
-    assert_equal "-0.5x^3", @poly_differ.send(:Convert,[[3,-0.5,""]],"x")
-    assert_equal "-2x^3+15.5x^2-1.8x", @poly_differ.send(:Convert,[[1,-1.8,""],[2,15.5,""],[3,-2,""]],"x")
+    assert_equal "", @poly_differ.send(:Convert, [[1.5, 0, ""]], "x")
+    assert_equal "x^1.5", @poly_differ.send(:Convert, [[1.5, 1, ""]], "x")
+    assert_equal "1.5x", @poly_differ.send(:Convert, [[1, 1.5, ""]], "x")
+    assert_equal "-2x^1.5", @poly_differ.send(:Convert, [[1.5, -2, ""]], "x")
+    assert_equal "2.2x^3.5", @poly_differ.send(:Convert, [[3.5, 2.2, ""]], "x")
+    assert_equal "2.5x^3+x^1.2", @poly_differ.send(:Convert, [[1.2, 1, ""], [3, 2.5, ""]], "x")
+    assert_equal "-2.1x^3.2", @poly_differ.send(:Convert, [[3.2, -2.1, ""]], "x")
+    assert_equal "-0.5x^3", @poly_differ.send(:Convert, [[3, -0.5, ""]], "x")
+    assert_equal "-2x^3+15.5x^2-1.8x", @poly_differ.send(:Convert, [[1, -1.8, ""], [2, 15.5, ""], [3, -2, ""]], "x")
   end
 
   def test_multiple_variables_deri_convertor
@@ -47,12 +47,12 @@ class TestConvertor < Minitest::Test
     assert_equal "zx^3.8", @poly_differ.send(:Convert, [[3.8, 1, "z"]], "x")
     assert_equal "yz", @poly_differ.send(:Convert, [[0, 1, "yz"]], "x")
 
-    assert_equal "-2.2yzx^2-zx^2+8x-7y", @poly_differ.send(:Convert,[[0,-7,"y"],[1,8,""],[2,-1,"z"],[2,-2.2,"yz"]],"x")
-    assert_equal "-2.2yzx^2-zx^2+8yx-7", @poly_differ.send(:Convert,[[0,-7,""],[1,8,"y"],[2,-1,"z"],[2,-2.2,"yz"]],"x")
-    assert_equal "8y^2x-7y", @poly_differ.send(:Convert,[[0,-7,"y"],[1,8,"y^2"]],"x")
-    assert_equal "8y^2x^3-7y", @poly_differ.send(:Convert,[[0,-7,"y"],[3,8,"y^2"]],"x")
-    assert_equal "8y^2zx^3-2.5yx^2", @poly_differ.send(:Convert,[[2,-2.5,"y"],[3,8,"y^2z"]],"x")
+    assert_equal "-zx^2-2.2yzx^2+8x-7y",
+                 @poly_differ.send(:Convert, [[0, -7, "y"], [1, 8, ""], [2, -1, "z"], [2, -2.2, "yz"]], "x")
+    assert_equal "-zx^2-2.2yzx^2+8yx-7",
+                 @poly_differ.send(:Convert, [[0, -7, ""], [1, 8, "y"], [2, -1, "z"], [2, -2.2, "yz"]], "x")
+    assert_equal "8y^2x-7y", @poly_differ.send(:Convert, [[0, -7, "y"], [1, 8, "y^2"]], "x")
+    assert_equal "8y^2x^3-7y", @poly_differ.send(:Convert, [[0, -7, "y"], [3, 8, "y^2"]], "x")
+    assert_equal "8y^2zx^3-2.5yx^2", @poly_differ.send(:Convert, [[2, -2.5, "y"], [3, 8, "y^2z"]], "x")
   end
-
-
 end

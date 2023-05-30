@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "Convertor"
 require_relative "deri_calculation"
 require_relative "deri_parser"
@@ -6,7 +8,6 @@ require_relative "validation"
 module DeriGuru
   # class providing functionality for differentiating polynomials - differentiation part
   class PolyDiffer
-    public
     # Differentiates a polynomial
     # @param [String] poly_str
     # @param [String] diff_var

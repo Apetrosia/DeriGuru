@@ -7,9 +7,9 @@ module DeriGuru
 
     def validation_check(poly_string)
       md = poly_string.match(/[^a-z+\-*.^\d\s]/)
-      raise UnexpectedSymbolError, "Input string contains unexpected symbol: #{md[0]}" if md != nil
+      raise UnexpectedSymbolError, "Input string contains unexpected symbol: #{md[0]}" unless md.nil?
 
-      copy = "+-".include?(poly_string[0]) ? poly_string : "+" + poly_string
+      copy = "+-".include?(poly_string[0]) ? poly_string : "+#{poly_string}"
       copy = copy.strip
       # [+-](\d+(\.\d+)?)?\*?((?<var>[a-z])(\^\d+)?\*?)*
       pattern = /^(
@@ -19,13 +19,18 @@ module DeriGuru
                  ([a-z](\^\d+)?\*?)*\s*   # variables
                  )+$/x
 
-      raise IncorrectSymbolError, "You passed invalid polynomial to the method" if copy.match(pattern) == nil || copy[-1] == "*"
+      if copy.match(pattern).nil? || copy[-1] == "*"
+        raise IncorrectSymbolError,
+              "You passed invalid polynomial to the method"
+      end
 
       copy.split(/[+-]/).each do |term|
         vars = term.scan(/[a-z]/)
-        raise IncorrectSymbolError, "Multiple similar variables in one term are not allowed" if vars.size > vars.uniq.size
+        if vars.size > vars.uniq.size
+          raise IncorrectSymbolError,
+                "Multiple similar variables in one term are not allowed"
+        end
       end
-
     end
   end
 end
