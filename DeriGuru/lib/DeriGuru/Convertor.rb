@@ -33,7 +33,7 @@ module DeriGuru
                     added_elems += 1
                 end
             end
-            return str
+            str
         end
     end
 end
