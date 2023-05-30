@@ -5,11 +5,11 @@ require_relative "lib/DeriGuru/version"
 Gem::Specification.new do |spec|
   spec.name = "DeriGuru"
   spec.version = DeriGuru::VERSION
-  spec.authors = ["Анна Петросян"]
+  spec.authors = ["Елизавета Домбаян", "Александр Земляк", "Нарек Казоян", "Анна Петросян", "Виктория Хоружая"]
   spec.email = ["apetrosia@sfedu.ru"]
 
-  spec.summary = "Write a short summary, because RubyGems requires one."
-  spec.description = "Write a longer description or delete this line."
+  spec.summary = "Gem for symbolic differentiation of polynomials"
+  spec.description = "Gem for symbolic differentiation of polynomials containing only integers or fractional numbers and variables."
   spec.homepage = "https://github.com/Apetrosia/DeriGuru"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.6.0"
