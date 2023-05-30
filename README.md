@@ -16,7 +16,7 @@ In order for the method to process the string and find the derivative, the data 
 
 ### Valid characters
 
-In a polynomial, you can use numbers, a dot, a multiplication sign, and uppercase Latin letters. Capital letters are prohibited.
+In a polynomial, you can use numbers, a dot, a multiplication sign, and lowercase Latin letters. Capital letters are prohibited.
 
 ### Valid terms
 
@@ -30,7 +30,21 @@ There are examples of correct input data:
     dif
 ````
 
-the method can only process correctly specified strings, so there are some restrictions on the input data. User cannot:
+the method can only process correctly specified strings, so there are some restrictions on the input data.
+
+### Exceptions
+
+if the input string is incorrect, user may get one of two errors:
+
+#### UnexpectedSymbolError
+
+You get get this exception if unexpected (forbidden) characters are used in the input string.
+
+#### IncorrectSymbolError
+
+You can get this exception if the input string contains only allowed characters, but some of them are used incorrectly.
+
+In order for the method to work without exceptions, user must follow a number of rules. User cannot:
 
 - Use brackets:
 
@@ -59,7 +73,7 @@ the method can only process correctly specified strings, so there are some restr
     #IncorrectSymbolError
     dif
 ````
-- Use a single operation symbol or dot several times in a row:
+- Use single operation symbol or dot several times in a row:
 
 ```ruby
     #IncorrectSymbolError
@@ -73,29 +87,16 @@ the method can only process correctly specified strings, so there are some restr
     dif
 ````
 
-- Write a number after a letter:
+- Write number after letter:
 
 ```ruby
     #IncorrectSymbolError
     dif
 ````
 
-- Write a letter as an exponent:
+- Write letter as exponent:
 
 ```ruby
     #IncorrectSymbolError
-    dif
-````
-
-- Use the multiplication sign between numbers and a differentiable variable:
-
-```ruby
-    #IncorrectSymbolError
-    dif
-````
-
-- But user can use multiplication sign between different variables:
-
-```ruby
     dif
 ````
