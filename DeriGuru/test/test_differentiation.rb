@@ -52,10 +52,18 @@ class TestConvertor < Minitest::Test
     assert_equal "-4x", @poly_differ.send(:differentiate, "-2x^2+4.2", "x")
 
     assert_equal "15x^2+6.2", @poly_differ.send(:differentiate, "5.0x^3+6.2x", "x")
+
+    assert_equal "-0.6x^2+6.9", @poly_differ.send(:differentiate, "-0.2x^3+6.9x", "x")
+    assert_equal "-38.1x^2-6", @poly_differ.send(:differentiate, "-12.7x^3-6x", "x")
+    assert_equal "-6.3x^2+7x", @poly_differ.send(:differentiate, "-2.1x^3+3.5x^2", "x")
+    assert_equal "-333.33x^2-6x", @poly_differ.send(:differentiate, "-111.11x^3-3x^2", "x")
+    assert_equal "25.5x^4+16.1x^3-18x^2-9x+18.9", @poly_differ.send(:differentiate, "5.1x^5+4.025x^4-6x^3-4.5x^2+18.9x+100000000", "x")
+    assert_equal "27x^4+9.2x+18", @poly_differ.send(:differentiate, "5.4x^5+4.6x^2+18x+1098712419870000000", "x")
   end
 
   def test_differentiation_for_multiple_variables
-    assert_equal "6.0yx^3", @poly_differ.send(:differentiate, "1.5x^4y", "x")
+    assert_equal "-zx^3+2.22yzx^2+8x-7y",@poly_differ.send(:differentiate, "0.74x^3yz-0.25x^4z+4x^2-7xy" , "x")
+    assert_equal "6yx^3", @poly_differ.send(:differentiate, "1.5x^4y", "x")
     assert_equal "yz", @poly_differ.send(:differentiate, "xyz", "x")
     assert_equal "-zx^3+2.25yzx^2+8x-7y", @poly_differ.send(:differentiate, "0.75x^3yz-0.25x^4z+4x^2-7xy", "x")
   end
