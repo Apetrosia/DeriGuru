@@ -5,7 +5,8 @@ module DeriGuru
   class PolyDiffer
     private
 
-    
+    # @param [Array] poly
+    # return [Array] poly
     def calculate_derivative(poly)
       if (!poly.nil?)
         poly.delete_if {|term| term[0] == 0 }
