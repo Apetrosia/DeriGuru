@@ -1,3 +1,8 @@
+require_relative "Convertor"
+require_relative "deri_calculation"
+require_relative "deri_parser"
+require_relative "validation"
+
 module DeriGuru
   # class providing functionality for differentiating polynomials - differentiation part
   class PolyDiffer
