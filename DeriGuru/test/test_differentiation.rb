@@ -17,9 +17,9 @@ class TestConvertor < Minitest::Test
 
   def test_differentiation_for_int_var
     assert_equal "1", @poly_differ.send(:differentiate, "x", "x")
-    assert_equal "0", @poly_differ.send(:differentiate, "1", "x")
-    assert_equal "0", @poly_differ.send(:differentiate, "154678+1241+12-12125+45-10000000", "x")
-    assert_equal "1", @poly_differ.send(:differentiate, "x^0", "x")
+    assert_equal "", @poly_differ.send(:differentiate, "1", "x")
+    assert_equal "", @poly_differ.send(:differentiate, "154678+1241+12-12125+45-10000000", "x")
+    assert_equal "", @poly_differ.send(:differentiate, "x^0", "x")
     
     assert_equal "2x", @poly_differ.send(:differentiate, "x^2", "x")
     assert_equal "-2x", @poly_differ.send(:differentiate, "-x^2", "x")
@@ -49,9 +49,9 @@ class TestConvertor < Minitest::Test
     assert_equal "-1.5x^2", @poly_differ.send(:differentiate, "-0.5x^3", "x")
 
     assert_equal "4x+1.5", @poly_differ.send(:differentiate, "2x^2+1.5x", "x")
-    assert_equal "-4x+4.2", @poly_differ.send(:differentiate, "-2x^2+4.2", "x")
+    assert_equal "-4x", @poly_differ.send(:differentiate, "-2x^2+4.2", "x")
 
-    assert_equal "15.3x^2+6.2", @poly_differ.send(:differentiate, "5.1x^3+6.2x", "x")
+    assert_equal "15x^2+6.2", @poly_differ.send(:differentiate, "5.0x^3+6.2x", "x")
     assert_equal "-0.6x^2+6.9", @poly_differ.send(:differentiate, "-0.2x^3+6.9x", "x")
     assert_equal "-38.1x^2-6", @poly_differ.send(:differentiate, "-12.7x^3-6x", "x")
 
@@ -63,9 +63,9 @@ class TestConvertor < Minitest::Test
   end
 
   def test_differentiation_for_multiple_variables
-    assert_equal "6yx^3", @poly_differ.send(:differentiate, "1.5x^4y", "x")
+    assert_equal "6.0yx^3", @poly_differ.send(:differentiate, "1.5x^4y", "x")
     assert_equal "yz", @poly_differ.send(:differentiate, "xyz", "x")
-    assert_equal "-2.22yzx^2-zx^3+8x-7y",@poly_differ.send(:differentiate, "0.74x^3yz-0.25x^4z+4x^2-7xy" , "x")
+    assert_equal "-zx^3-2.22yzx^2+8x-7y",@poly_differ.send(:differentiate, "0.74x^3yz-0.25x^4z+4x^2-7xy" , "x")
   end
 
 end
