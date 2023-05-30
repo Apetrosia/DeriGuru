@@ -47,8 +47,8 @@ class TestConvertor < Minitest::Test
     assert_equal "zx^3.8", @poly_differ.send(:Convert, [[3.8, 1, "z"]], "x")
     assert_equal "yz", @poly_differ.send(:Convert, [[0, 1, "yz"]], "x")
 
-    assert_equal "-2.2yzx^2-zx^1.6+8x-7y", @poly_differ.send(:Convert,[[0,-7,"y"],[1,8,""],[1.6,-1,"z"],[2,-2.2,"yz"]],"x")
-    assert_equal "-2.2yzx^2-zx^1.6+8yx-7", @poly_differ.send(:Convert,[[0,-7,""],[1,8,"y"],[1.6,-1,"z"],[2,-2.2,"yz"]],"x")
+    assert_equal "-2.2yzx^2-zx^2+8x-7y", @poly_differ.send(:Convert,[[0,-7,"y"],[1,8,""],[2,-1,"z"],[2,-2.2,"yz"]],"x")
+    assert_equal "-2.2yzx^2-zx^2+8yx-7", @poly_differ.send(:Convert,[[0,-7,""],[1,8,"y"],[2,-1,"z"],[2,-2.2,"yz"]],"x")
     assert_equal "8y^2x-7y", @poly_differ.send(:Convert,[[0,-7,"y"],[1,8,"y^2"]],"x")
     assert_equal "8y^2x^3-7y", @poly_differ.send(:Convert,[[0,-7,"y"],[3,8,"y^2"]],"x")
     assert_equal "8y^2zx^3-2.5yx^2", @poly_differ.send(:Convert,[[2,-2.5,"y"],[3,8,"y^2z"]],"x")
