@@ -40,7 +40,7 @@ module DeriGuru
           end
         end
         other_vars = other_vars.sort * ""
-        if (find_term = terms.find { |elem| elem[0] == degree && elem[2] == other_vars})
+        if (find_term = terms.find { |elem| elem[0] == degree && elem[2] == other_vars })
           coefficient += find_term[1]
           terms.delete(find_term)
         end
@@ -52,4 +52,3 @@ module DeriGuru
     end
   end
 end
-
