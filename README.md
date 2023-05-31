@@ -4,9 +4,9 @@ A gem for symbolic differentiation of polynomials containing only integers or fr
 
 ## Usage
 
-
-
-DeriGuru have one public class you can use - PolyDiffer. This class has one public method differentiate. It takes a string type parameter and converts it to a new string with a differentiated polynomial.
+DeriGuru offers you singleton class for symbolic polynomials differentiating - PolyDiffer. 
+This class contains one method differentiate, which will provide you with all necessary functionality.
+It takes a string type parameter and converts it to a new string with a differentiated polynomial.
 
 In order for the method to process the string and find the derivative, the data must be correct.
 
@@ -60,7 +60,7 @@ In order for the method to work without exceptions, user must follow a number of
 ```ruby
     # ArgumentError
     output = PolyDiffer.differentiate("", "x")
-    output = PolyDiffer.differentiate(["x^3", "")
+    output = PolyDiffer.differentiate(["x^3"], "")
 ````
 
 - Use brackets:
