@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "test_helper"
-require_relative "../lib/DeriGuru/Convertor"
+require_relative "../lib/DeriGuru/convertor"
 
 # tests for derivative calculating stage
 class TestConvertor < Minitest::Test
