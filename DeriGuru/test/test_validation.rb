@@ -189,15 +189,29 @@ class TestValidation < Minitest::Test
     assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x^^3") }
   end
 
-  # def test_wrong_placed_symb_letters
-  #   assert_raises(StandardError) { @poly_differ.send(:validation_check,"2x+xy") }
-  #   assert_raises(StandardError) { @poly_differ.send(:validation_check,"hello") }
-  # end
-
   def test_wrong_placed_symbol
     assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x+-x") }
     assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x-+x") }
     assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x^-4+x") }
     assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x9-3+y") }
+  end
+
+  def test_several_vars
+    assert_silent { @poly_differ.send(:validation_check, "2xy+3yx") }
+    assert_silent { @poly_differ.send(:validation_check, "2xy+3yx") }
+    assert_silent { @poly_differ.send(:validation_check, "2xz*y+3z*yx") }
+    assert_silent { @poly_differ.send(:validation_check, "2x^3y+3y^5x") }
+    assert_silent { @poly_differ.send(:validation_check, "-2x^4y^15 + 3y^67*x^12") }
+  end
+
+  def test_wrong_several_vars
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "x2y") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "2x^^2") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "2x^") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "2x^y") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "2xyy") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "2xy^y") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "2xy5") }
+    assert_raises(IncorrectSymbolError) { @poly_differ.send(:validation_check, "-2x^4y^15+ 3y^6*7*x^12") }
   end
 end
