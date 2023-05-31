@@ -13,7 +13,7 @@ module DeriGuru
     # @param [String] diff_var
     # @return [String] differentiated polynomial
     def differentiate(poly_str, diff_var)
-      validation_check(poly_str)
+      validation_check(poly_str, diff_var)
       poly_parsed = poly_parse(poly_str, diff_var)
       poly_diff = calculate_derivative(poly_parsed)
       Convert(poly_diff, diff_var)

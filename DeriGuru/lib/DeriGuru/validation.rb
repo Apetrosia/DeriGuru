@@ -5,13 +5,25 @@ module DeriGuru
   class PolyDiffer
     private
 
-    def validation_check(poly_string)
+    def validation_check(poly_string, diff_var)
+      raise ArgumentError, "Arguments should be of string type" if poly_string.class != String ||
+                                                                   diff_var.class != String
+
+      raise ArgumentError, "Polynomial string is empty" if poly_string.empty?
+      raise ArgumentError, "Differentiation variable string is empty" if diff_var.empty?
+
       md = poly_string.match(/[^a-z+\-*.^\d\s]/)
       raise UnexpectedSymbolError, "Input string contains unexpected symbol: #{md[0]}" unless md.nil?
 
+      if diff_var.length > 1 ||
+         diff_var.match(/[a-z]/).nil?
+        raise UnexpectedSymbolError,
+              "Differentiation variable should be a lowercase latin letter"
+      end
+
       copy = "+-".include?(poly_string[0]) ? poly_string : "+#{poly_string}"
       copy = copy.strip
-      # [+-](\d+(\.\d+)?)?\*?((?<var>[a-z])(\^\d+)?\*?)*
+
       pattern = /^(
                  [+-]\s*(?![+-])          # sign before term
                  (\d+(\.\d+)?)?\s*        # coefficient
