@@ -73,6 +73,23 @@ class TestDeriCalculation < Minitest::Test
     assert_polynomials_in_delta expected, result
   end
 
-  # TODO: Implement tests with multiple variables
-  def test_deri_calculation_multiple_variables; end
+  def test_deri_calculation_multiple_variables
+    # test with one extra variable
+    poly = [[1, 5, "y"], [2, 3, ""]]
+    expected = [[0, 5, "y"], [1, 6, ""]]
+
+    assert_equal expected, @poly_differ.send(:calculate_derivative, poly)
+
+    # test with vanishing of extra variables
+    poly = [[0, 2, "yzw"]]
+    expected = []
+
+    assert_equal expected, @poly_differ.send(:calculate_derivative, poly)
+
+    # test with many extra variables
+    poly = [[1, 83.5, "oit"], [2, 2.25, "ur"], [3, -45.2, "thw"], [4, 0.4, "a"]]
+    expected = [[0, 83.5, "oit"], [1, 4.5, "ur"], [2, -135.6, "thw"], [3, 1.6, "a"]]
+
+    assert_polynomials_in_delta expected, @poly_differ.send(:calculate_derivative, poly)
+  end
 end
