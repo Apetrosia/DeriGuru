@@ -19,7 +19,7 @@ module Minitest
     end
 
     def assert_arrays_in_delta(expected, actual, msg = nil)
-      delta = 0.0000000001
+      delta = 0.000_000_000_1
 
       expected.zip(actual).each { |x, y| assert_in_delta x, y, delta, msg }
     end

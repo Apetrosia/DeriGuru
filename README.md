@@ -8,10 +8,6 @@ A gem for symbolic differentiation of polynomials containing only integers or fr
 
 DeriGuru have one public class you can use - PolyDiffer. This class has one public method differentiate. It takes a string type parameter and converts it to a new string with a differentiated polynomial.
 
-```ruby
-    polydiffer = PolyDiffer.new
-````
-
 In order for the method to process the string and find the derivative, the data must be correct.
 
 ### Valid characters
@@ -25,19 +21,23 @@ As terms, you can use integers and fractional numbers, letters and their product
 There are examples of correct input data:
 
 ```ruby
-    output = polydiffer.differentiate("5+46")
-    output = polydiffer.differentiate("-4.98x-5.57x")
-    output = polydiffer.differentiate("x^2+x^3+x^6")
-    output = polydiffer.differentiate("5*x+12*y")
-    output = polydiffer.differentiate("y^32+3*y^2+9.8*x")
-    output = polydiffer.differentiate("78.89*x^3+0*y^1+12*z^2")
+    output = PolyDiffer.differentiate("5+46", "x")
+    output = PolyDiffer.differentiate("-4.98x-5.57x", "x")
+    output = PolyDiffer.differentiate("x^2+x^3+x^6", "x")
+    output = PolyDiffer.differentiate("5*x+12*y", "x")
+    output = PolyDiffer.differentiate("y^32+3*y^2+9.8*x", "x")
+    output = PolyDiffer.differentiate("78.89*x^3+0*y^1+12*z^2", "x")
 ````
 
 the method can only process correctly specified strings, so there are some restrictions on the input data.
 
 ### Exceptions
 
-if the input string is incorrect, user may get one of two errors:
+if the input string is incorrect, user may get one of three errors:
+
+#### ArgumentError
+
+You get this exception if you pass non-string data as arguments to the method or if arguments' length is incorrect.
 
 #### UnexpectedSymbolError
 
@@ -49,53 +49,67 @@ You can get this exception if the input string contains only allowed characters,
 
 In order for the method to work without exceptions, user must follow a number of rules. User cannot:
 
+- Pass non-string data:
+```ruby
+    # ArgumentError
+    output = PolyDiffer.differentiate(482, 5)
+    output = PolyDiffer.differentiate(["x^2", "x^3"], "x")
+````
+
+- Pass empty strings
+```ruby
+    # ArgumentError
+    output = PolyDiffer.differentiate("", "x")
+    output = PolyDiffer.differentiate(["x^3", "")
+````
+
 - Use brackets:
 
 ```ruby
     # UnexpectedSymbolError
-    output = polydiffer.differentiate("x^(-12-9)+x^(12-4)")
+    output = PolyDiffer.differentiate("x^(-12-9)+x^(12-4)", "x")
 ````
 
 - Use division sign (fractions must be represented as numbers with a dot):
 
 ```ruby
     # UnexpectedSymbolError
-    output = polydiffer.differentiate("12.95/34")
+    output = PolyDiffer.differentiate("12.95/34", "x")
 ````
 
 - Use characters that are not related to polynomials:
 
 ```ruby
     # UnexpectedSymbolError
-    output = polydiffer.differentiate("1<5+x>y+x^7+x^0!")
+    output = PolyDiffer.differentiate("1<5+x>y+x^7+x^0!", "x")
 ````
 
 - Use several identical variables in one term:
 
 ```ruby
     # IncorrectSymbolError
-    output = polydiffer.differentiate("2xyy")
+    output = PolyDiffer.differentiate("2xyy", "x")
 ````
 - Use symbols incorrectly
 
 ```ruby
     # IncorrectSymbolError
-    output = polydiffer.differentiate("x^^4")
-    output = polydiffer.differentiate("x^-4+x")
-    output = polydiffer.differentiate("x-+x")
-    output = polydiffer.differentiate("4.2**x+x--x")
+    output = PolyDiffer.differentiate("x^^4", "x")
+    output = PolyDiffer.differentiate("x^-4+x", "x")
+    output = PolyDiffer.differentiate("x-+x", "x")
+    output = PolyDiffer.differentiate("4.2**x+x--x", "x")
 ````
 
 - Write number after letter:
 
 ```ruby
     # IncorrectSymbolError
-    output = polydiffer.differentiate("x9-3+y")
+    output = PolyDiffer.differentiate("x9-3+y", "x")
 ````
 
 - Write letter as exponent:
 
 ```ruby
     # IncorrectSymbolError
-    output = polydiffer.differentiate("x^y")
+    output = PolyDiffer.differentiate("x^y", "x")
 ````

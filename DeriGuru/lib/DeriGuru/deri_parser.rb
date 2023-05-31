@@ -5,7 +5,7 @@ module DeriGuru
   class PolyDiffer
     private
 
-    def poly_parse(str, val)
+    def self.poly_parse(str, val)
       terms = []
       return terms if str.empty?
 

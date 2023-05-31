@@ -6,7 +6,7 @@ module DeriGuru
 
     # @param [Array] array_of_ratio
     # @param [char] diff_var
-    def Convert(array_of_ratio, diff_var)
+    def self.convert(array_of_ratio, diff_var)
       str = ""
       added_elems = 0
       array_of_ratio.sort.reverse.each do |ratio|

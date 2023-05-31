@@ -5,7 +5,7 @@ module DeriGuru
   class PolyDiffer
     private
 
-    def validation_check(poly_string, diff_var)
+    def self.validation_check(poly_string, diff_var)
       raise ArgumentError, "Arguments should be of string type" if poly_string.class != String ||
                                                                    diff_var.class != String
 

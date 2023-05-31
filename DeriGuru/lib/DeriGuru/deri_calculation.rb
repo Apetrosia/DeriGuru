@@ -7,7 +7,7 @@ module DeriGuru
 
     # @param [Array] poly
     # return [Array] poly
-    def calculate_derivative(poly)
+    def self.calculate_derivative(poly)
       unless poly.nil?
         poly.delete_if { |term| (term[0]).zero? }
         poly.each do |term|
